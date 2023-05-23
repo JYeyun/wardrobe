@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.wardrobe.HomeFragment"
+        android:name="com.example.wardrobe.home.HomeFragment"
         tools:layout="@layout/fragment_home" >
     </fragment>
 

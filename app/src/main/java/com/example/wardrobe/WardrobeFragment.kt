@@ -74,16 +74,16 @@ class WardrobeFragment : Fragment() {
             adapter_bottom.notifyDataSetChanged()
         }
 
-        viewModel.isCodiMode.observe(viewLifecycleOwner){
-            when(binding.radioGroup.checkedButtonId){
-                R.id.button_top -> adapter_top.notifyDataSetChanged()
-                R.id.button_bottom -> adapter_bottom.notifyDataSetChanged()
-            }
-            if(it==true)
-                binding.floatingActionButtonCodi.setImageResource(R.drawable.button_return)
-            else
-                binding.floatingActionButtonCodi.setImageResource(R.drawable.button_fab_codi)
-        }
+//        viewModel.isCodiMode.observe(viewLifecycleOwner){
+//            when(binding.radioGroup.checkedButtonId){
+//                R.id.button_top -> adapter_top.notifyDataSetChanged()
+//                R.id.button_bottom -> adapter_bottom.notifyDataSetChanged()
+//            }
+//            if(it==true)
+//                binding.floatingActionButtonCodi.setImageResource(R.drawable.button_return)
+//            else
+//                binding.floatingActionButtonCodi.setImageResource(R.drawable.button_fab_codi)
+//        }
 
         var isFABOpen = false
 
@@ -114,12 +114,12 @@ class WardrobeFragment : Fragment() {
         }
 
         binding.floatingActionButtonAdd.setOnClickListener {
-            navController.navigate(R.id.action_wardrobeFragment_to_addclothesFragment)
+            navController.navigate(R.id.action_wardrobeFragment_to_searchFragment)
         }
 
-        binding.floatingActionButtonCodi.setOnClickListener {
-            viewModel.isCodiMode.value = viewModel.isCodiMode.value != true
-        }
+//        binding.floatingActionButtonCodi.setOnClickListener {
+//            viewModel.isCodiMode.value = viewModel.isCodiMode.value != true
+//        }
 
 
         loadTopList()

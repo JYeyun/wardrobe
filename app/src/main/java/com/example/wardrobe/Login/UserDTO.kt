@@ -1,4 +1,4 @@
-package com.example.wardrobe.DTO
+package com.example.wardrobe.Login
 
 data class UserDTO(
     var nickname: String = "",

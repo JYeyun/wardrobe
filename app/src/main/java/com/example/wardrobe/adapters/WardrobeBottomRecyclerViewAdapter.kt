@@ -82,10 +82,7 @@ class WardrobeBottomRecyclerViewAdapter(private val viewModel: WardrobeViewModel
             }
 
 
-            if(viewModel.isCodiMode.value == true)
-                checkBox.visibility = View.VISIBLE
-            else
-                checkBox.visibility = View.GONE
+
 
 
             checkBox.setOnCheckedChangeListener(null)

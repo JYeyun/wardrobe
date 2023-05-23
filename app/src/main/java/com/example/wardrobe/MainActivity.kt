@@ -4,13 +4,16 @@ package com.example.wardrobe
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.wardrobe.databinding.ActivityMainBinding
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -25,6 +28,13 @@ class MainActivity : AppCompatActivity() {
 
 
         setCustomToolbar(R.id.toolbar)
+
+        var navController = findNavController(R.id.)
+        if(FirebaseAuth.getInstance().currentUser!=null){
+            var navGraph = navController.graph
+            navGraph.startDestination = R.id.HomeFragment
+            navController.graph = navGraph
+        }
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment

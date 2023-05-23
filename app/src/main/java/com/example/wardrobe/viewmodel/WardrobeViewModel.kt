@@ -1,7 +1,9 @@
 package com.example.wardrobe.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.wardrobe.DTO.TopBottomDTO
 
 data class Item(val clothesImageUrl: String)
 
@@ -18,6 +20,13 @@ class WardrobeViewModel: ViewModel() {
     val setItems = ArrayList<Item>()
     val setItemsListData = MutableLiveData<ArrayList<Item>>()
 
+    val searchItems = ArrayList<TopBottomDTO>()
+    val searchItemsListData = MutableLiveData<ArrayList<TopBottomDTO>>()
+    private val articleDataList = mutableListOf<TopBottomDTO>()
+    private val _articleLiveData = MutableLiveData<List<TopBottomDTO>>()
+    val articleLiveData: LiveData<List<TopBottomDTO>> get() = _articleLiveData
+    val searchSuccess = MutableLiveData(false)
+
     val communityItems = ArrayList<Item>()
     val communityItemsListData = MutableLiveData<ArrayList<Item>>()
 
@@ -25,9 +34,19 @@ class WardrobeViewModel: ViewModel() {
     val topSelectedCheckBox = MutableLiveData<Int>()
     val bottomSelectedCheckBox = MutableLiveData<Int>()
 
-    val isCodiMode = MutableLiveData<Boolean>(false)
-
     /* 옷장 이미지 */
+    fun searchArticleModel(title: String) {
+        searchItems.clear()
+        searchItemsListData.value?.clear()
+        for (TopBottomDTO in articleDataList) {
+            if (TopBottomDTO.season.equals(title)) {
+                searchItems.add(TopBottomDTO)
+                searchItemsListData.value = searchItems
+            }
+        }
+        _articleLiveData.value = searchItemsListData.value
+        searchSuccess.value = true
+    }
 
     fun addWardrobeItem(item: Item,which: String){
         if(which.equals("top")){

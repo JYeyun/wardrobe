@@ -11,9 +11,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val viewModel by viewModels<HomeViewModel>()
 
-    private val homeWeatherAdapter by lazy { HomeAdapter() }
+    private val homeWeatherAdapter by lazy { HomeAdapter() { pos -> itemClickEvent(pos) } }
 
-    private val homeCommunityAdapter by lazy { HomeAdapter() }
+    private val homeCommunityAdapter by lazy { HomeAdapter() { pos -> itemClickEvent(pos) } }
 
     override fun initView() {
         initDummyData()
@@ -34,6 +34,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         viewModel.communityItemListData.observe(viewLifecycleOwner){
             homeCommunityAdapter.submitList(it)
         }
+    }
+
+    private fun itemClickEvent(pos: Int) {
+        // 아이템 클릭 시 이동하고 싶으면 이 함수에 넣으세요
+        shortShowToast("아이템 클릭: $pos")
     }
 
     private fun initDummyData() {

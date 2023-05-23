@@ -8,16 +8,17 @@ import com.bumptech.glide.Glide
 import com.example.wardrobe.databinding.ItemviewHomeBinding
 import com.example.wardrobe.home.model.HomeItem
 
-class HomeAdapter() :
+class HomeAdapter(private val itemClickEvent: (Int) -> Unit) :
     ListAdapter<HomeItem, HomeAdapter.ViewHolder>(HomeItemDiffCallback) {
 
     class ViewHolder(private val binding: ItemviewHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: HomeItem) {
+        fun bind(item: HomeItem, itemClickEvent: (Int) -> Unit) {
 
             // clothesImage 세팅
             Glide.with(itemView).load(item.clothesImageUrl).into(binding.ivClothes)
+            itemView.setOnClickListener { itemClickEvent(adapterPosition) }
         }
     }
 
@@ -28,7 +29,7 @@ class HomeAdapter() :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(currentList[position])
+        holder.bind(currentList[position], itemClickEvent)
     }
 
 }

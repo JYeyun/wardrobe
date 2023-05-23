@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/wardrobeFragment"
-        android:name="com.example.wardrobe.WardrobeFragment"
+        android:name="com.example.wardrobe.wardrobe.WardrobeFragment"
         tools:layout="@layout/fragment_wardrobe" >
         <action
             android:id="@+id/action_wardrobeFragment_to_addclothesFragment"

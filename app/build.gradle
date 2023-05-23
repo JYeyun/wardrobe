@@ -56,6 +56,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-database-ktx'
+
+    implementation 'com.google.firebase:firebase-database:19.2.1'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
 
     implementation 'androidx.core:core-ktx:1.10.1'

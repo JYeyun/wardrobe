@@ -115,5 +115,15 @@
         android:name="com.example.wardrobe.DetailCodiEditFragment"
         tools:layout="@layout/fragment_detail_codi_edit" >
     </fragment>
+    <activity
+        android:id="@+id/mainLoginActivity"
+        android:name="com.example.wardrobe.MainLoginActivity"
+        android:label="activity_mainlogin"
+        tools:layout="@layout/activity_mainlogin" />
+    <activity
+        android:id="@+id/signUpActivity"
+        android:name="com.example.wardrobe.SignUpActivity"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 
 </navigation>

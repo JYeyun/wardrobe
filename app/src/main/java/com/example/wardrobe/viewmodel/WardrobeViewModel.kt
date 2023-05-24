@@ -4,10 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.wardrobe.DTO.TopBottomDTO
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 data class Item(val clothesImageUrl: String)
 
 class WardrobeViewModel: ViewModel() {
+    val db = Firebase.firestore
+    val topColRef = db.collection("top")
+    // Bottom(하의) Collection Ref
+    val bottomColRef = db.collection("bottom")
+
     val wardrobeItems = ArrayList<Item>()
     val wardrobeItemsListData = MutableLiveData<ArrayList<Item>>()
 
@@ -20,13 +27,6 @@ class WardrobeViewModel: ViewModel() {
     val setItems = ArrayList<Item>()
     val setItemsListData = MutableLiveData<ArrayList<Item>>()
 
-    val searchItems = ArrayList<TopBottomDTO>()
-    val searchItemsListData = MutableLiveData<ArrayList<TopBottomDTO>>()
-    private val articleDataList = mutableListOf<TopBottomDTO>()
-    private val _articleLiveData = MutableLiveData<List<TopBottomDTO>>()
-    val articleLiveData: LiveData<List<TopBottomDTO>> get() = _articleLiveData
-    val searchSuccess = MutableLiveData(false)
-
     val communityItems = ArrayList<Item>()
     val communityItemsListData = MutableLiveData<ArrayList<Item>>()
 
@@ -34,19 +34,16 @@ class WardrobeViewModel: ViewModel() {
     val topSelectedCheckBox = MutableLiveData<Int>()
     val bottomSelectedCheckBox = MutableLiveData<Int>()
 
+    val isCodiMode = MutableLiveData<Boolean>(false)
+
+    val searchItems = ArrayList<Item>()
+    val searchItemsListData = MutableLiveData<ArrayList<Item>>()
+    private val articleDataList = mutableListOf<TopBottomDTO>()
+    private val _articleLiveData = MutableLiveData<List<TopBottomDTO>>()
+    val articleLiveData: LiveData<List<TopBottomDTO>> get() = _articleLiveData
+    val searchSuccess = MutableLiveData(false)
+
     /* 옷장 이미지 */
-    fun searchArticleModel(title: String) {
-        searchItems.clear()
-        searchItemsListData.value?.clear()
-        for (TopBottomDTO in articleDataList) {
-            if (TopBottomDTO.season.equals(title)) {
-                searchItems.add(TopBottomDTO)
-                searchItemsListData.value = searchItems
-            }
-        }
-        _articleLiveData.value = searchItemsListData.value
-        searchSuccess.value = true
-    }
 
     fun addWardrobeItem(item: Item,which: String){
         if(which.equals("top")){
@@ -61,8 +58,16 @@ class WardrobeViewModel: ViewModel() {
             setItems.add(item)
             setItemsListData.value = setItems
         }
+        else if(which.equals("season")){
+            searchItems.add(item)
+            searchItemsListData.value = searchItems
+        }
 //        wardrobeItems.add(item)
 //        wardrobeItemsListData.value = wardrobeItems
+    }
+
+    fun searchItem(item: Item,which: String){
+
     }
 
 
@@ -97,4 +102,16 @@ class WardrobeViewModel: ViewModel() {
         communityItemsListData.value = wardrobeItems
     }
 
+//    fun searchArticleModel(title: String) {
+//        searchItems.clear()
+//        searchItemsListData.value?.clear()
+//        for (TopBottomDTO in articleDataList) {
+//            if (TopBottomDTO.season.equals(title)) {
+//                searchItems.add(TopBottomDTO)
+//                searchItemsListData.value = searchItems
+//            }
+//        }
+//        _articleLiveData.value = searchItemsListData.value
+//        searchSuccess.value = true
+//    }
 }

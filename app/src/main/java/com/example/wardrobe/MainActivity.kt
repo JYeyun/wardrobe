@@ -29,12 +29,6 @@ class MainActivity : AppCompatActivity() {
 
         setCustomToolbar(R.id.toolbar)
 
-        var navController = findNavController(R.id.)
-        if(FirebaseAuth.getInstance().currentUser!=null){
-            var navGraph = navController.graph
-            navGraph.startDestination = R.id.HomeFragment
-            navController.graph = navGraph
-        }
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment

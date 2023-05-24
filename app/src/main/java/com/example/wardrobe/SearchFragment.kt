@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -37,31 +36,50 @@ class SearchFragment: Fragment(){
         initView()
         return binding.root
     }
-    private fun initView(){
-        adapter = WardrobeRecyclerViewAdapter(viewModel,context,this)
+    private fun initView() {
+        adapter = WardrobeRecyclerViewAdapter(viewModel, context, this)
 
-        viewModel.topItemsListData.observe(viewLifecycleOwner){
+        viewModel.topItemsListData.observe(viewLifecycleOwner) {
             adapter.notifyDataSetChanged()
         }
-//        loadTopList()
-        binding.SearchRecyclerView.apply{
-            adapter=adapter
-            layoutManager = StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL)
-        }
+
+        binding.SearchRecyclerView.adapter = adapter
+        binding.SearchRecyclerView.layoutManager = StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL)
+
         binding.searchProductBtn.setOnClickListener {
             Log.d("search", "input: ${binding.editSearch.text.toString()}")
-            viewModel.searchArticleModel(binding.editSearch.text.toString())
+            loadseasonList()
+            loadsizeList()
+            loadbrandList()
         }
-
     }
-//    private fun loadTopList(){
-//        viewModel.deleteAllWardrobeItem("top")
-//        topColRef.whereEqualTo("userID",currentUID).get()
-//            .addOnSuccessListener {
-//                for(doc in it){
-//                    viewModel.addWardrobeItem(Item(doc["imageRef"].toString()),"top")
-//                }
-//            }
-//    }
+    private fun loadseasonList() {
+        val seasonColRef = db.collection("top")
+        seasonColRef.whereEqualTo("season", binding.editSearch.text.toString()).get()
+            .addOnSuccessListener {
+                for (doc in it) {
+                    viewModel.addWardrobeItem(Item(doc["imageRef"].toString()),"top")
+                }
+            }
+    }
+    private fun loadsizeList() {
+        val seasonColRef = db.collection("top")
+        seasonColRef.whereEqualTo("size", binding.editSearch.text.toString()).get()
+            .addOnSuccessListener {
+                for (doc in it) {
+                    viewModel.addWardrobeItem(Item(doc["imageRef"].toString()),"top")
+                }
+            }
+    }
+    private fun loadbrandList() {
+        val seasonColRef = db.collection("top")
+        seasonColRef.whereEqualTo("brand", binding.editSearch.text.toString()).get()
+            .addOnSuccessListener {
+                for (doc in it) {
+                    viewModel.addWardrobeItem(Item(doc["imageRef"].toString()),"top")
+                }
+            }
+    }
+
 
 }

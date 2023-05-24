@@ -60,7 +60,7 @@ class LoginFragment : Fragment(){
 
     }
 
-    public override fun onStart() {
+   override fun onStart() {
         super.onStart()
         moveMainPage(firebaseAuth.currentUser)
     }
@@ -84,7 +84,7 @@ class LoginFragment : Fragment(){
     }
     private fun moveMainPage(user: FirebaseUser?) {
         if (user != null) {
-            findNavController().navigate(R.id.action_loginFragment2_to_homeFragment)
+        //    findNavController().navigate(R.id.action_loginFragment2_to_homeFragment)
 
         }
     }
@@ -101,4 +101,12 @@ class LoginFragment : Fragment(){
             finishAffinity()
         }
     }*/
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+    }
 }
